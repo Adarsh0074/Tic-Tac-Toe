@@ -4,7 +4,7 @@ A twisted version of Tic Tac Toe with emojis and vanishing rules! Choose your em
 
 ## 🚀 Live Demo
 
-[Play Blink Tac Toe](https://your-deployment-url.netlify.app)
+[Play Blink Tac Toe](https://elegant-snickerdoodle-efcbe6.netlify.app/)
 
 ## 🎯 Game Features
 
