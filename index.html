@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blink Tac Toe - The Ultimate Emoji Strategy Game</title>
+    <meta name="description" content="A twisted version of Tic Tac Toe with emojis and vanishing rules. Choose your category and battle for victory!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header class="game-header">
+            <h1 class="game-title">🎮 Blink Tac Toe 🎮</h1>
+            <div class="header-controls">
+                <button id="helpBtn" class="help-btn">❓ Help</button>
+                <button id="soundToggle" class="sound-btn">🔊 Sound</button>
+            </div>
+        </header>
+
+        <div id="scoreDisplay" class="score-display hidden">
+            <div class="player-score" id="player1Score">Player 1: 0 wins</div>
+            <div class="player-score" id="player2Score">Player 2: 0 wins</div>
+        </div>
+
+        <div id="gameStats" class="game-stats hidden">
+            <div class="stat-item">⏱️ Game: <span id="gameTime">0:00</span></div>
+            <div class="stat-item">🎯 Moves: <span id="moveCount">0</span></div>
+            <button id="statsToggle" class="stats-toggle">Show Stats</button>
+        </div>
+
+        <div id="categorySelection" class="screen">
+            <div class="category-header">
+                <h2>⚡ Choose Your Emoji Categories ⚡</h2>
+                <p class="category-subtitle">Each player must select a different category</p>
+            </div>
+            
+            <div class="category-selection">
+                <div class="player-selection">
+                    <h3>⭐ Player 1</h3>
+                    <div class="categories" data-player="1">
+                        <div class="category" data-category="animals" data-player="1">
+                            <div class="category-emoji">🐶</div>
+                            <h4>Animals</h4>
+                            <div class="emoji-preview">🐱 🐵 🐰</div>
+                        </div>
+                        <div class="category" data-category="food" data-player="1">
+                            <div class="category-emoji">🍕</div>
+                            <h4>Food</h4>
+                            <div class="emoji-preview">🍟 🍔 🍩</div>
+                        </div>
+                        <div class="category" data-category="sports" data-player="1">
+                            <div class="category-emoji">⚽</div>
+                            <h4>Sports</h4>
+                            <div class="emoji-preview">🏀 🏈 🎾</div>
+                        </div>
+                        <div class="category" data-category="nature" data-player="1">
+                            <div class="category-emoji">🌸</div>
+                            <h4>Nature</h4>
+                            <div class="emoji-preview">🌳 🌊 ⭐</div>
+                        </div>
+                        <div class="category" data-category="space" data-player="1">
+                            <div class="category-emoji">🚀</div>
+                            <h4>Space</h4>
+                            <div class="emoji-preview">🛸 🌟 🪐</div>
+                        </div>
+                        <div class="category" data-category="tech" data-player="1">
+                            <div class="category-emoji">💻</div>
+                            <h4>Tech</h4>
+                            <div class="emoji-preview">📱 🎮 ⌚</div>
+                        </div>
+                        <div class="category" data-category="faces" data-player="1">
+                            <div class="category-emoji">😀</div>
+                            <h4>Faces</h4>
+                            <div class="emoji-preview">😎 🤔 😍</div>
+                        </div>
+                        <div class="category" data-category="objects" data-player="1">
+                            <div class="category-emoji">🎯</div>
+                            <h4>Objects</h4>
+                            <div class="emoji-preview">🎪 🎨 🎭</div>
+                        </div>
+                    </div>
+                    <div class="selected-category" id="player1Selected">Select a category</div>
+                </div>
+
+                <div class="player-selection">
+                    <h3>⭐ Player 2</h3>
+                    <div class="categories" data-player="2">
+                        <div class="category" data-category="animals" data-player="2">
+                            <div class="category-emoji">🐶</div>
+                            <h4>Animals</h4>
+                            <div class="emoji-preview">🐱 🐵 🐰</div>
+                        </div>
+                        <div class="category" data-category="food" data-player="2">
+                            <div class="category-emoji">🍕</div>
+                            <h4>Food</h4>
+                            <div class="emoji-preview">🍟 🍔 🍩</div>
+                        </div>
+                        <div class="category" data-category="sports" data-player="2">
+                            <div class="category-emoji">⚽</div>
+                            <h4>Sports</h4>
+                            <div class="emoji-preview">🏀 🏈 🎾</div>
+                        </div>
+                        <div class="category" data-category="nature" data-player="2">
+                            <div class="category-emoji">🌸</div>
+                            <h4>Nature</h4>
+                            <div class="emoji-preview">🌳 🌊 ⭐</div>
+                        </div>
+                        <div class="category" data-category="space" data-player="2">
+                            <div class="category-emoji">🚀</div>
+                            <h4>Space</h4>
+                            <div class="emoji-preview">🛸 🌟 🪐</div>
+                        </div>
+                        <div class="category" data-category="tech" data-player="2">
+                            <div class="category-emoji">💻</div>
+                            <h4>Tech</h4>
+                            <div class="emoji-preview">📱 🎮 ⌚</div>
+                        </div>
+                        <div class="category" data-category="faces" data-player="2">
+                            <div class="category-emoji">😀</div>
+                            <h4>Faces</h4>
+                            <div class="emoji-preview">😎 🤔 😍</div>
+                        </div>
+                        <div class="category" data-category="objects" data-player="2">
+                            <div class="category-emoji">🎯</div>
+                            <h4>Objects</h4>
+                            <div class="emoji-preview">🎪 🎨 🎭</div>
+                        </div>
+                    </div>
+                    <div class="selected-category" id="player2Selected">Select a category</div>
+                </div>
+            </div>
+            
+            <div class="category-actions">
+                <button id="startGame" class="start-btn" disabled>Start Game! 🚀</button>
+            </div>
+        </div>
+
+        <div id="gameScreen" class="screen hidden">
+            <div class="game-layout">
+                <div class="player-info-section">
+                    <div class="player-info-card" id="player1Info">
+                        <div class="player-header">
+                            <h3>Player 1</h3>
+                            <div class="turn-badge hidden" id="player1Turn">Your Turn</div>
+                        </div>
+                        <div class="player-content">
+                            <div class="category-name" id="player1Category">Animals</div>
+                            <div class="emoji-preview" id="player1Preview"></div>
+                            <div class="active-count" id="player1Count">Active: 0/3</div>
+                            <div class="emoji-list" id="player1List"></div>
+                        </div>
+                    </div>
+
+                    <div class="player-info-card" id="player2Info">
+                        <div class="player-header">
+                            <h3>Player 2</h3>
+                            <div class="turn-badge hidden" id="player2Turn">Your Turn</div>
+                        </div>
+                        <div class="player-content">
+                            <div class="category-name" id="player2Category">Food</div>
+                            <div class="emoji-preview" id="player2Preview"></div>
+                            <div class="active-count" id="player2Count">Active: 0/3</div>
+                            <div class="emoji-list" id="player2List"></div>
+                        </div>
+                    </div>
+
+                    <div class="next-emoji-card">
+                        <h3>Next Emoji</h3>
+                        <div class="next-emoji-display" id="nextEmoji">🐶</div>
+                        <div class="turn-time">Turn time: <span id="turnTime">0:00</span></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-board-section">
+                    <div class="game-board">
+                        <div class="board" id="board">
+                            <div class="cell" data-index="0">
+                                <div class="cell-number">1</div>
+                            </div>
+                            <div class="cell" data-index="1">
+                                <div class="cell-number">2</div>
+                            </div>
+                            <div class="cell" data-index="2">
+                                <div class="cell-number">3</div>
+                            </div>
+                            <div class="cell" data-index="3">
+                                <div class="cell-number">4</div>
+                            </div>
+                            <div class="cell" data-index="4">
+                                <div class="cell-number">5</div>
+                            </div>
+                            <div class="cell" data-index="5">
+                                <div class="cell-number">6</div>
+                            </div>
+                            <div class="cell" data-index="6">
+                                <div class="cell-number">7</div>
+                            </div>
+                            <div class="cell" data-index="7">
+                                <div class="cell-number">8</div>
+                            </div>
+                            <div class="cell" data-index="8">
+                                <div class="cell-number">9</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-status">
+                        <div id="playingStatus" class="playing-status">
+                            <p class="current-turn" id="currentTurn">Player 1's turn</p>
+                            <p class="next-emoji-info" id="nextEmojiInfo">Get ready for: 🐶 from Animals</p>
+                            <p class="blocked-position hidden" id="blockedPosition">⚠️ Position 1 is blocked this turn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls-section">
+                    <div class="game-controls-card">
+                        <h3>Game Controls</h3>
+                        <div class="controls-content">
+                            <button id="newGame" class="control-button">🔄 New Game</button>
+                            <button id="resetGame" class="control-button">🏠 New Categories</button>
+                        </div>
+                    </div>
+
+                    <div id="extendedStats" class="stats-card hidden">
+                        <h3>Game Statistics</h3>
+                        <div class="stats-content">
+                            <div>Game Time: <span id="detailedGameTime">0:00</span></div>
+                            <div>Total Moves: <span id="detailedMoveCount">0</span></div>
+                            <div>Current Turn: <span id="detailedTurnTime">0:00</span></div>
+                            <div>Board Emojis: <span id="boardEmojiCount">0</span>/6</div>
+                            <div>P1 Active: <span id="p1ActiveCount">0</span>/3</div>
+                            <div>P2 Active: <span id="p2ActiveCount">0</span>/3</div>
+                            <div id="blockedWarning" class="blocked-warning hidden">⚠️ Position <span id="blockedPos">1</span> blocked</div>
+                            <div class="recent-moves">
+                                <div class="moves-title">Recent Moves:</div>
+                                <div id="recentMovesList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="winScreen" class="screen hidden">
+            <div class="win-content">
+                <div class="win-header">
+                    <span class="trophy">🏆</span>
+                    <span id="winnerText">Player 1 Wins!</span>
+                    <span class="trophy">🏆</span>
+                </div>
+                <div class="winning-line" id="winningLine">Winning line: 🐶 🐱 🐵</div>
+                <div class="win-actions">
+                    <button id="playAgain" class="play-again-button">Play Again</button>
+                    <button id="newCategories" class="new-categories-button">New Categories</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="helpModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🎯 How to Play Blink Tac Toe</h2>
+                    <button class="close-button" id="closeHelp">✕</button>
+                </div>
+                <div class="help-content">
+                    <div class="help-section">
+                        <h3>🎯 Objective</h3>
+                        <p>Be the first to get 3 of your emojis in a row (horizontal, vertical, or diagonal)!</p>
+                    </div>
+
+                    <div class="help-section">
+                        <h3>🎮 Game Rules</h3>
+                        <ul>
+                            <li>Each player chooses a different emoji category before starting</li>
+                            <li>Players take turns placing random emojis from their category</li>
+                            <li>Maximum 3 emojis per player on the board at any time</li>
+                            <li>When placing a 4th emoji, your oldest emoji disappears (FIFO)</li>
+                            <li>You cannot place an emoji where your oldest just disappeared</li>
+                            <li>First to get 3 in a row wins!</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-section">
+                        <h3>✨ Special Features</h3>
+                        <ul>
+                            <li>Emojis are randomly selected from your chosen category</li>
+                            <li>Visual animations for placement and removal</li>
+                            <li>Score tracking across multiple rounds</li>
+                            <li>Winning combinations are highlighted</li>
+                            <li>Sound effects and visual feedback</li>
+                            <li>Game statistics and timing</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-section">
+                        <h3>🏆 Strategy Tips</h3>
+                        <ul>
+                            <li>Remember which emoji will vanish next</li>
+                            <li>Block your opponent's potential winning moves</li>
+                            <li>Plan your placement considering the vanishing rule</li>
+                            <li>Use the random emoji element to your advantage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
